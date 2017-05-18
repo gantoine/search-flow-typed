@@ -8,7 +8,8 @@
     "react": "^15.5.4",
     "react-bootstrap": "0.31.0",
     "react-dom": "^15.5.4",
-    "serve": "5.1.5"
+    "serve": "5.1.5",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "flow-bin": "0.46.0",

@@ -1,25 +1,26 @@
-var axios = require('axios');
-
-// var id = "YOUR_CLIENT_ID";
-// var sec = "YOUR_SECRET_ID";
-// var params = "?client_id=" + id + "&client_secret=" + sec;
+import axios from 'axios'
+import _ from 'underscore'
 
 function parsePath(path) {
-  const split = path.path.split('/')
-  if(split.length !== 3) { return {}; }
+  const flow = /\/(flow_.+)/.exec(path.path);
+  const definition = /(.+v\d.+)\/flow/.exec(path.path);
 
-  var definition, flow, _rest;
-  [definition, flow, ..._rest] = split;
+  if (!(flow && definition)) {
+    return {type: null};
+  }
+
   return {
-    definition: definition,
-    flow: flow
+    definition: definition[1],
+    flow: flow[1],
+    type: path.type
   }
 }
 
 function navigateDefinition(directory) {
-  return directory.data.tree.filter((definition) => {
-    return definition.type === "blob";
-  }).map(parsePath)
+  return _.chain(directory.data.tree)
+    .map(parsePath)
+    .filter((definition) => {return definition.type === "tree";})
+    .value();
 }
 
 

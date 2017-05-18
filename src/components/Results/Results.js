@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Result extends Component {
   render() {
     return (
-      <li key={this.props.result.definition}>
+      <li>
         {this.props.result.definition}
       </li>
     )
@@ -20,8 +20,9 @@ class Results extends Component {
     return (
       <ul>
         {this.props.results.map((result) => {
+          var key = `${result.definition}/${result.flow}`;
           return (
-            <Result result={result}/>
+            <Result key={key} result={result}/>
           )
         })}
       </ul>
