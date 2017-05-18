@@ -1,17 +1,41 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Result extends Component {
+class Variant extends Component {
   render() {
     return (
       <li>
-        {this.props.result.definition}
+        {this.props.variant.version}
+        <ul>
+          {this.props.variant.flows.map((flow) => {
+            return (
+              <li>{flow}</li>
+            )
+          })}
+        </ul>
       </li>
     )
   }
 }
 
-Result.propTypes = {
+class Definition extends Component {
+  render() {
+    return (
+      <li>
+        {this.props.result.definition}
+        <ul>
+          {this.props.result.versions.map((variant) => {
+            return (
+              <Variant key={variant.version} variant={variant}/>
+            )
+          })}
+        </ul>
+      </li>
+    )
+  }
+}
+
+Definition.propTypes = {
   result: PropTypes.object.isRequired
 }
 
@@ -20,9 +44,8 @@ class Results extends Component {
     return (
       <ul>
         {this.props.results.map((result) => {
-          var key = `${result.definition}/${result.flow}`;
           return (
-            <Result key={key} result={result}/>
+            <Definition key={result.definition} result={result}/>
           )
         })}
       </ul>

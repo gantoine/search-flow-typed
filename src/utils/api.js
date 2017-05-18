@@ -9,17 +9,36 @@ function parsePath(path) {
     return {type: null};
   }
 
+  var typedef, version;
+  [typedef, version] = definition[1].split('_v');
+
   return {
-    definition: definition[1],
+    definition: typedef,
+    version: version,
     flow: flow[1],
-    type: path.type
+    type: path.type,
   }
 }
 
 function navigateDefinition(directory) {
   return _.chain(directory.data.tree)
     .map(parsePath)
-    .filter((definition) => {return definition.type === "tree";})
+    .filter((typedef) => {return typedef.type === "tree";})
+    .groupBy('definition')
+    .map((typedef) => {
+      var versions = _.chain(typedef).groupBy('version')
+        .map((version) => {
+          return {
+            version: version[0].version,
+            flows: _.pluck(version, 'flow')
+          };
+        })
+        .value();
+      return {
+        definition: typedef[0].definition,
+        versions: versions
+      };
+    })
     .value();
 }
 
