@@ -9,7 +9,7 @@ class Variant extends Component {
         <ul>
           {this.props.variant.flows.map((flow) => {
             return (
-              <li>{flow}</li>
+              <li key={flow}>{flow}</li>
             )
           })}
         </ul>
