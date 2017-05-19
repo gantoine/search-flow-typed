@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PanelGroup, Panel, Well, OverlayTrigger, Tooltip, Table } from 'react-bootstrap';
 import Clipboard from 'clipboard';
+import FontAwesome from 'react-fontawesome';
 
 import './Results.css'
 
 class Variant extends Component {
+  toRepo(variant) {
+    let github = 'https://github.com/flowtype/flow-typed/tree/master/definitions/npm';
+    return `${github}/${variant.definition}_v${variant.version}/${variant.flow}`;
+  }
   render() {
     return (
       <tr>
         <td>{this.props.variant.version}</td>
         <td>{this.props.variant.flow}</td>
+        <td>
+          <a href={this.toRepo(this.props.variant)} target="_blank" className="hyperlink">
+            <FontAwesome name='external-link' />
+          </a>
+        </td>
       </tr>
     )
   }

@@ -1,6 +1,6 @@
 .panel-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -8,8 +8,13 @@
   min-width: 49%;
 }
 
-.panel-group .panel.panel-default {
-  margin-top: 5px;
+.panel.panel-default > .panel-body {
+  padding: 0px;
+}
+
+.panel-group .panel.panel-default,
+.panel-group .panel+.panel.panel-default{
+  margin-top: 10px;
 }
 
 .panel.panel-default > .panel-heading {
@@ -31,6 +36,7 @@
 .panel-result-title {
   text-transform: capitalize;
   color: #666;
+  margin-right: 10px;
 }
 
 .panel-heading > div > .well {
@@ -49,4 +55,23 @@
 .panel-heading > div > .well:active {
   color: white;
   background: #2d343a;
+}
+
+.panel-body .table-responsive {
+  margin-bottom: 0px;
+  border: none;
+}
+
+.table-responsive > .table {
+  margin-bottom: 0;
+}
+
+.table>tbody>tr:first-child td {
+  border-top: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .panel-group .panel.panel-default {
+    width: 100%;
+  }
 }

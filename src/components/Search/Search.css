@@ -27,3 +27,10 @@
 .search-results > .project-name {
   display: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .input-group-lg.input-group[class*=col-] {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
