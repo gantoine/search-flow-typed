@@ -33,9 +33,16 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <div className="input-group input-group-lg">
-          <input type="text" value={this.state.query}
-            className="form-control" onChange={this.search} />
+        <div className={"container search-container " + (this.state.query.length ? 'search-results' : '')}>
+          <div className="row">
+            <div className="col-md-12">
+              <input type="text"
+                value={this.state.query}
+                placeholder="Search Definitions..."
+                className="form-control"
+                onChange={this.search} />
+            </div>
+          </div>
         </div>
         <Results results={this.state.results} />
       </div>

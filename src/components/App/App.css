@@ -38,6 +38,14 @@
   font-size: 24px;
 }
 
+.content {
+  padding: 2em 0;
+  background: #384048;
+  color: white;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
 .nav.navbar-nav > li > a:hover {
   color: #fff;
   background: #2d343a;

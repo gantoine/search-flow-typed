@@ -1,0 +1,8 @@
+.search-container {
+  padding-top: 16em;
+  transition: 0.15s padding ease-out;
+}
+
+.search-results {
+  padding-top: 5em;
+}
