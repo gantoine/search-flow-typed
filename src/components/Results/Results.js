@@ -18,6 +18,10 @@ class Variant extends Component {
   }
 }
 
+Variant.propTypes = {
+  result: PropTypes.object.isRequired
+}
+
 class Definition extends Component {
   render() {
     return (

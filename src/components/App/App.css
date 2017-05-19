@@ -2,13 +2,55 @@
   text-align: center;
 }
 
-.app-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.fa {
+  margin: 0 5px;
 }
 
-.app-intro {
-  font-size: large;
+.hyperlink {
+  color: #e8bd36;
+}
+
+.hyperlink:hover {
+  color: #d3a618;
+  text-decoration: none;
+}
+
+.navbar {
+  background: #2d343a;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  box-shadow: 0 0px 1px rgba(0,0,0,0.5);
+}
+
+.navbar-brand.ftds-brand {
+  font-size: 22px;
+  color: white;
+  margin-right: 1em;
+}
+
+.navbar-nav > li.nav-item > a {
+  color: #ddd;
+  font-size: 16px;
+  text-shadow: none;
+}
+
+.navbar-nav > li > a > .fa {
+  font-size: 24px;
+}
+
+.nav.navbar-nav > li > a:hover {
+  color: #fff;
+  background: #2d343a;
+  text-decoration: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background: #2d343a;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  line-height: 2.5;
 }
