@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PanelGroup, Panel } from 'react-bootstrap';
 
+import './Results.css'
+
 class Variant extends Component {
   render() {
     return (
@@ -42,20 +44,10 @@ Definition.propTypes = {
 }
 
 class Results extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      activeKey: (props.results[0] ? props.results[0].definition : ''),
-    };
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-  handleSelect(activeKey) {
-    this.setState({activeKey});
-  }
   render() {
     return (
       <div className="container">
-        <PanelGroup activeKey={this.state.activeKey} onSelect={this.handleSelect} accordion>
+        <PanelGroup accordion>
           {this.props.results.map((result) => {
             var def = result.definition;
             return (
