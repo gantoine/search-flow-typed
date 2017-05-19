@@ -26,18 +26,10 @@ function navigateDefinition(directory) {
     .filter((typedef) => {return typedef.type === "tree";})
     .groupBy('definition')
     .map((typedef) => {
-      var versions = _.chain(typedef).groupBy('version')
-        .map((version) => {
-          return {
-            version: version[0].version,
-            flows: _.pluck(version, 'flow')
-          };
-        })
-        .value();
       return {
         definition: typedef[0].definition,
-        versions: versions
-      };
+        versions: typedef
+      }
     })
     .value();
 }

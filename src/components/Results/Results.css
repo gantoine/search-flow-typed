@@ -1,3 +1,17 @@
+.panel-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.panel.panel-default {
+  min-width: 49%;
+}
+
+.panel-group .panel.panel-default {
+  margin-top: 5px;
+}
+
 .panel.panel-default > .panel-heading {
   background: #fafafa;
   color: #444;

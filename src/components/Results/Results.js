@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PanelGroup, Panel, Well, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { PanelGroup, Panel, Well, OverlayTrigger, Tooltip, Table } from 'react-bootstrap';
 import Clipboard from 'clipboard';
 
 import './Results.css'
@@ -8,16 +8,10 @@ import './Results.css'
 class Variant extends Component {
   render() {
     return (
-      <li>
-        {this.props.variant.version}
-        <ul>
-          {this.props.variant.flows.map((flow) => {
-            return (
-              <li key={flow}>{flow}</li>
-            )
-          })}
-        </ul>
-      </li>
+      <tr>
+        <td>{this.props.variant.version}</td>
+        <td>{this.props.variant.flow}</td>
+      </tr>
     )
   }
 }
@@ -30,19 +24,22 @@ class Definition extends Component {
   render() {
     return (
       <div>
-        {this.props.result.versions.map((variant) => {
-          return (
-            <Variant key={variant.version} variant={variant}/>
-          )
-        })}
+        <Table responsive>
+          <tbody>
+            {this.props.result.versions.map((variant) => {
+              return (
+                <Variant key={variant.version + variant.flow} variant={variant}/>
+              )
+            })}
+          </tbody>
+        </Table>
       </div>
     )
   }
 }
 
 Definition.propTypes = {
-  result: PropTypes.object.isRequired,
-  definition: PropTypes.string.isRequired
+  result: PropTypes.object.isRequired
 }
 
 class PanelHeader extends Component {
@@ -83,7 +80,7 @@ class Results extends Component {
             return (
               <Panel key={def} eventKey={def}
                   header={<PanelHeader command={def} />}>
-                <Definition result={result} definition={def}/>
+                <Definition result={result}/>
               </Panel>
             )
           })}
