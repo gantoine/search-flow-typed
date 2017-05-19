@@ -1,8 +1,22 @@
 .search-container {
+  padding: 2em 0;
+  background: #384048;
+  color: white;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.results-container {
+  padding: 2em 0;
+  overflow: scroll;
+}
+
+.search-no-results {
   padding-top: 16em;
   transition: 0.15s padding ease-out;
 }
 
 .search-results {
-  padding-top: 5em;
+  padding-top: 4em;
+  transition: 0.15s padding ease-out;
 }
