@@ -31,3 +31,8 @@
 .panel-heading > div > .well:hover {
   color: #222;
 }
+
+.panel-heading > div > .well:active {
+  color: white;
+  background: #2d343a;
+}

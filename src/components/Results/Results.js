@@ -41,7 +41,8 @@ class Definition extends Component {
 }
 
 Definition.propTypes = {
-  result: PropTypes.object.isRequired
+  result: PropTypes.object.isRequired,
+  definition: PropTypes.string.isRequired
 }
 
 class PanelHeader extends Component {
@@ -55,12 +56,12 @@ class PanelHeader extends Component {
   render() {
     return (
       <div className="panel-title">
-        <div className="panel-result-title">{this.props.definition}</div>
+        <div className="panel-result-title">{this.props.command}</div>
         <OverlayTrigger placement="bottom" overlay={
-            <Tooltip id={"tooltip-" + this.props.definition}>Click to Copy!</Tooltip>
+            <Tooltip id={"tooltip-" + this.props.command}>Click to Copy!</Tooltip>
           }>
-          <Well data-clipboard-text={"flow-typed install" + this.props.definition}>
-            flow-typed install {this.props.definition}
+          <Well data-clipboard-text={"flow-typed install " + this.props.command}>
+            flow-typed install {this.props.command}
           </Well>
         </OverlayTrigger>
       </div>
@@ -69,7 +70,7 @@ class PanelHeader extends Component {
 }
 
 PanelHeader.propTypes = {
-  definition: PropTypes.string.isRequired
+  command: PropTypes.string.isRequired
 }
 
 class Results extends Component {
@@ -81,8 +82,8 @@ class Results extends Component {
             var def = result.definition;
             return (
               <Panel key={def} eventKey={def}
-                  header={<PanelHeader definition={def} />}>
-                <Definition result={result}/>
+                  header={<PanelHeader command={def} />}>
+                <Definition result={result} definition={def}/>
               </Panel>
             )
           })}

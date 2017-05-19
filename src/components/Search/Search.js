@@ -9,16 +9,16 @@ import './Search.css';
 class Search extends Component {
   constructor(props) {
     super();
-    this.definitions = [];
     this.state = {
       results: [],
       query: '',
+      definitions: [],
     };
     this.search = this.search.bind(this);
 
     api.fetchDefinitions()
       .then((definitions) => {
-        this.definitions = definitions;
+        this.setState({definitions: definitions});
       })
   }
   search(event) {
@@ -28,18 +28,19 @@ class Search extends Component {
     var filtered = [];
 
     if (query !== '') {
-      filtered = _.filter(this.definitions, (typedef) => {
+      filtered = _.filter(this.state.definitions, (typedef) => {
         return typedef.definition.toLowerCase().includes(query);
       })
     }
 
-    this.setState({results: filtered});
+    this.setState({results: _.first(filtered, 20)});
   }
   render() {
     return (
       <div>
         <div className="search-container">
           <div className={"container " + (this.state.query.length ? 'search-results' : 'search-no-results')}>
+            <h1 className="project-name">Flow-Typed Definition Search</h1>
             <div className="row">
               <div className="col-md-12 input-group input-group-lg">
                 <span className="input-group-addon" id="search-addon">
@@ -47,7 +48,7 @@ class Search extends Component {
                 </span>
                 <input type="text"
                   value={this.state.query}
-                  placeholder="Search Definitions..."
+                  placeholder={`Search ${this.state.definitions.length} third-party library interface definitions...`}
                   className="form-control"
                   aria-describedby="search-addon"
                   onChange={this.search} />

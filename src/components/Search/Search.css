@@ -11,11 +11,19 @@
 }
 
 .search-no-results {
-  padding-top: 16em;
+  padding-top: 10em;
   transition: 0.15s padding ease-out;
 }
 
 .search-results {
   padding-top: 4em;
   transition: 0.15s padding ease-out;
+}
+
+.project-name {
+  margin-bottom: 1em;
+}
+
+.search-results > .project-name {
+  display: none;
 }
