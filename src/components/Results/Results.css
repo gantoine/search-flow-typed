@@ -1,3 +1,4 @@
 .panel-title {
   text-transform: capitalize;
+  cursor: pointer;
 }
