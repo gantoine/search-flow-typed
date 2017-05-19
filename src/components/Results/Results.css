@@ -1,4 +1,33 @@
-.panel-title {
+.panel.panel-default > .panel-heading {
+  background: #fafafa;
+  color: #444;
+  border-radius: 3px;
+}
+
+.panel-heading > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-heading > div:hover {
+  text-decoration: none;
+}
+
+.panel-result-title {
   text-transform: capitalize;
+  color: #666;
+}
+
+.panel-heading > div > .well {
+  background: white;
+  padding: 0 5px;
+  margin: 0;
   cursor: pointer;
+  color: #444;
+  -webkit-font-smoothing: antialiased;
+}
+
+.panel-heading > div > .well:hover {
+  color: #222;
 }

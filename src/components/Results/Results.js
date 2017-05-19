@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PanelGroup, Panel } from 'react-bootstrap';
+import { PanelGroup, Panel, Well } from 'react-bootstrap';
+import Clipboard from 'clipboard';
 
 import './Results.css'
 
@@ -43,15 +44,40 @@ Definition.propTypes = {
   result: PropTypes.object.isRequired
 }
 
+class PanelHeader extends Component {
+  constructor(props) {
+    super();
+    this.clipboard = new Clipboard('.well');
+  }
+  componentWillUnmount() {
+    this.clipboard.destroy();
+  }
+  render() {
+    return (
+      <div className="panel-title">
+        <div className="panel-result-title">{this.props.definition}</div>
+        <Well data-clipboard-text={"flow-typed install" + this.props.definition}>
+          flow-typed install {this.props.definition}
+        </Well>
+      </div>
+    )
+  }
+}
+
+PanelHeader.propTypes = {
+  definition: PropTypes.string.isRequired
+}
+
 class Results extends Component {
   render() {
     return (
       <div className="container">
-        <PanelGroup accordion>
+        <PanelGroup>
           {this.props.results.map((result) => {
             var def = result.definition;
             return (
-              <Panel key={def} header={def} eventKey={def}>
+              <Panel key={def} eventKey={def}
+                  header={<PanelHeader definition={def} />}>
                 <Definition result={result}/>
               </Panel>
             )
