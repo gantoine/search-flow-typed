@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PanelGroup, Panel, Well } from 'react-bootstrap';
+import { PanelGroup, Panel, Well, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Clipboard from 'clipboard';
 
 import './Results.css'
@@ -56,9 +56,13 @@ class PanelHeader extends Component {
     return (
       <div className="panel-title">
         <div className="panel-result-title">{this.props.definition}</div>
-        <Well data-clipboard-text={"flow-typed install" + this.props.definition}>
-          flow-typed install {this.props.definition}
-        </Well>
+        <OverlayTrigger placement="bottom" overlay={
+            <Tooltip id={"tooltip-" + this.props.definition}>Click to Copy!</Tooltip>
+          }>
+          <Well data-clipboard-text={"flow-typed install" + this.props.definition}>
+            flow-typed install {this.props.definition}
+          </Well>
+        </OverlayTrigger>
       </div>
     )
   }
