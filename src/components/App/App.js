@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+// @flow
+
+import React, { Component, Element } from 'react';
 import Search from '../Search/Search';
 import FontAwesome from 'react-fontawesome';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
@@ -6,7 +8,7 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import './App.css';
 
 class Navigation extends Component {
-  render() {
+  render(): Element<any> {
     return (
       <div className="container">
         <Navbar fixedTop={true}>
@@ -37,7 +39,7 @@ class Navigation extends Component {
 }
 
 class Footer extends Component {
-  render() {
+  render(): Element<any> {
     return (
       <div className="container">
         <div className="pull-left">
@@ -62,7 +64,7 @@ class Footer extends Component {
 }
 
 class App extends Component {
-  render() {
+  render(): Element<any> {
     return (
       <div className="app">
         <Navigation />

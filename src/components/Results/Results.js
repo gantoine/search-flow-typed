@@ -1,28 +1,37 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// @flow
+
+import React, { Component, Element } from 'react';
 import { PanelGroup, Panel, Well, OverlayTrigger, Tooltip, Table } from 'react-bootstrap';
 import Clipboard from 'clipboard';
 import FontAwesome from 'react-fontawesome';
 
-import './Results.css'
+import type { ValidResult, NetResult } from 'search-flow-typed';
+import type { VariantProps, DefinitionProps, PanelHeaderProps, ResultsProps } from './Results.type'
+import './Results.css';
 
 class Variant extends Component {
-  constructor(props) {
-    super();
+  toRepo: Function;
+  installCommand: Function;
+  props: VariantProps;
+  clipboard: Clipboard;
+
+  constructor(props: Object) {
+    super(props);
     this.clipboard = new Clipboard('.definiton-variant');
     this.installCommand = this.installCommand.bind(this);
+    this.toRepo = this.toRepo.bind(this);
   }
   componentWillUnmount() {
     this.clipboard.destroy();
   }
-  toRepo(variant) {
-    let github = 'https://github.com/flowtype/flow-typed/tree/master/definitions/npm';
+  toRepo(variant: ValidResult): string {
+    let github: string = 'https://github.com/flowtype/flow-typed/tree/master/definitions/npm';
     return `${github}/${variant.definition}_v${variant.version}/${variant.flow}`;
   }
-  installCommand(variant) {
+  installCommand(variant): string {
     return `flow-typed install ${variant.definition}@${variant.version}`;
   }
-  render() {
+  render(): Element<any> {
     return (
       <OverlayTrigger placement="bottom" overlay={
           <Tooltip id={`tooltip-${this.props.variant.version}-${this.props.variant.flow}`}>
@@ -45,17 +54,14 @@ class Variant extends Component {
   }
 }
 
-Variant.propTypes = {
-  variant: PropTypes.object.isRequired
-}
-
 class Definition extends Component {
-  render() {
+  props: DefinitionProps;
+  render(): Element<any> {
     return (
       <div>
         <Table responsive>
           <tbody>
-            {this.props.result.versions.map((variant) => {
+            {this.props.result.versions.map((variant: ValidResult) => {
               return (
                 <Variant key={`${variant.version}-${variant.flow}`} variant={variant}/>
               )
@@ -67,19 +73,17 @@ class Definition extends Component {
   }
 }
 
-Definition.propTypes = {
-  result: PropTypes.object.isRequired
-}
-
 class PanelHeader extends Component {
-  constructor(props) {
-    super();
+  clipboard: Clipboard;
+  props: PanelHeaderProps;
+  constructor(props: Object): void {
+    super(props);
     this.clipboard = new Clipboard('.well');
   }
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.clipboard.destroy();
   }
-  render() {
+  render(): Element<any> {
     return (
       <div className="panel-title">
         <div className="panel-result-title">{this.props.command}</div>
@@ -95,17 +99,14 @@ class PanelHeader extends Component {
   }
 }
 
-PanelHeader.propTypes = {
-  command: PropTypes.string.isRequired
-}
-
 class Results extends Component {
-  render() {
+  props: ResultsProps;
+  render(): Element<any> {
     return (
       <div className="container">
         <PanelGroup>
-          {this.props.results.map((result) => {
-            var def = result.definition;
+          {this.props.results.map((result: NetResult) => {
+            let def: string = result.definition;
             return (
               <Panel key={def} eventKey={def}
                   header={<PanelHeader command={def} />}>
@@ -117,10 +118,6 @@ class Results extends Component {
       </div>
     )
   }
-}
-
-Results.propTypes = {
-  results: PropTypes.array.isRequired
 }
 
 export default Results;
