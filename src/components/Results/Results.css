@@ -66,8 +66,12 @@
   margin-bottom: 0;
 }
 
-.table>tbody>tr:first-child td {
+.table > tbody > tr:first-child td {
   border-top: 0;
+}
+
+.table > tbody > tr > td:last-child {
+  text-align: right;
 }
 
 @media only screen and (max-width: 768px) {
