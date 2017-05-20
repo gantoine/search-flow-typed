@@ -13,9 +13,8 @@ all the common `npm` commands.
 
 ## Deploys
 
-Currently, deploys to production are done manually, locally, to [Surge](https://surge.sh/).
-I'll (eventually) have Travis take care of deploying to production. On the same
-veine, I'll also (eventually) set up PRs to auto-deploy with Surge.
+Travis takes care of deploying master to production on every build.
+[Surge](https://surge.sh/) takes care of hosting the app.
 
 ## Contributing
 
