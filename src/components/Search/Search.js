@@ -15,6 +15,7 @@ class Search extends Component {
       definitions: [],
     };
     this.search = this.search.bind(this);
+    this.resultClass = this.resultClass.bind(this);
 
     api.fetchDefinitions()
       .then((definitions) => {
@@ -35,11 +36,14 @@ class Search extends Component {
 
     this.setState({results: _.first(filtered, 20)});
   }
+  resultClass() {
+    return (this.state.query.length ? 'search-results' : 'search-no-results');
+  }
   render() {
     return (
       <div>
         <div className="search-container">
-          <div className={"container " + (this.state.query.length ? 'search-results' : 'search-no-results')}>
+          <div className={`container ${this.resultClass()}`}>
             <h1 className="project-name">Flow-Typed Definition Search</h1>
             <div className="row">
               <div className="col-md-12 input-group input-group-lg">

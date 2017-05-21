@@ -48,11 +48,14 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.panel-heading > div > .well:hover {
-  color: #222;
+.panel-heading > div > .well:hover,
+.table > tbody > tr:hover {
+  color: white;
+  background: #384048;
 }
 
-.panel-heading > div > .well:active {
+.panel-heading > div > .well:active,
+.table > tbody > tr:active {
   color: white;
   background: #2d343a;
 }
@@ -64,6 +67,10 @@
 
 .table-responsive > .table {
   margin-bottom: 0;
+}
+
+.table > tbody > tr {
+  cursor: pointer;
 }
 
 .table > tbody > tr:first-child td {

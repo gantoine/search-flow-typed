@@ -7,21 +7,40 @@ import FontAwesome from 'react-fontawesome';
 import './Results.css'
 
 class Variant extends Component {
+  constructor(props) {
+    super();
+    this.clipboard = new Clipboard('.definiton-variant');
+    this.installCommand = this.installCommand.bind(this);
+  }
+  componentWillUnmount() {
+    this.clipboard.destroy();
+  }
   toRepo(variant) {
     let github = 'https://github.com/flowtype/flow-typed/tree/master/definitions/npm';
     return `${github}/${variant.definition}_v${variant.version}/${variant.flow}`;
   }
+  installCommand(variant) {
+    return `flow-typed install ${variant.definition}@${variant.version}`;
+  }
   render() {
     return (
-      <tr>
-        <td>{this.props.variant.version}</td>
-        <td>{this.props.variant.flow}</td>
-        <td>
-          <a href={this.toRepo(this.props.variant)} target="_blank" className="hyperlink">
-            <FontAwesome name='external-link' />
-          </a>
-        </td>
-      </tr>
+      <OverlayTrigger placement="bottom" overlay={
+          <Tooltip id={`tooltip-${this.props.variant.version}-${this.props.variant.flow}`}>
+            Click to Copy Install Command!
+          </Tooltip>
+        }>
+        <tr className="definiton-variant" data-clipboard-text={
+            this.installCommand(this.props.variant)
+          }>
+          <td>{this.props.variant.version}</td>
+          <td>{this.props.variant.flow}</td>
+          <td>
+            <a href={this.toRepo(this.props.variant)} target="_blank" className="hyperlink">
+              <FontAwesome name='external-link' />
+            </a>
+          </td>
+        </tr>
+      </OverlayTrigger>
     )
   }
 }
@@ -38,7 +57,7 @@ class Definition extends Component {
           <tbody>
             {this.props.result.versions.map((variant) => {
               return (
-                <Variant key={variant.version + variant.flow} variant={variant}/>
+                <Variant key={`${variant.version}-${variant.flow}`} variant={variant}/>
               )
             })}
           </tbody>
@@ -65,7 +84,7 @@ class PanelHeader extends Component {
       <div className="panel-title">
         <div className="panel-result-title">{this.props.command}</div>
         <OverlayTrigger placement="bottom" overlay={
-            <Tooltip id={"tooltip-" + this.props.command}>Click to Copy!</Tooltip>
+            <Tooltip id={`tooltip-${this.props.command}`}>Click to Copy!</Tooltip>
           }>
           <Well data-clipboard-text={"flow-typed install " + this.props.command}>
             flow-typed install {this.props.command}
