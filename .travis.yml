@@ -12,3 +12,7 @@ deploy:
   project: ./build/
   domain: flowtyped.gantoine.com
   skip_cleanup: true
+notifications:
+  email:
+    on_success: never
+    on_failure: always
