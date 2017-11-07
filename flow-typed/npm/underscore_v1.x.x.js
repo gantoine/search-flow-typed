@@ -1,5 +1,5 @@
-// flow-typed signature: 305cde02db6c44d9fde326af152c452c
-// flow-typed version: b841660c6f/underscore_v1.x.x/flow_>=v0.38.x
+// flow-typed signature: d79d7a391b2d6131fadd6c8aea82781a
+// flow-typed version: d6519a5bfc/underscore_v1.x.x/flow_>=v0.50.x
 
 // @flow
 /* eslint-disable */
@@ -287,10 +287,12 @@ declare module "underscore" {
     find<T>(list: T[], predicate: (val: T)=>boolean): ?T;
     detect<T>(list: T[], predicate: (val: T)=>boolean): ?T;
 
-    filter<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
-    filter<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
-    select<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
-    select<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
+    filter<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    filter<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
+    filter<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
+    select<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    select<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
+    select<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
     where<T>(list: Array<T>, properties: Object): Array<T>;
     findWhere<T>(list: Array<T>, properties: {[key:string]: any}): ?T;
 
@@ -447,12 +449,12 @@ declare module "underscore" {
     invert<K, V>(object: {[keys: K]: V}): {[keys: V]: K};
     // TODO: _.create
     functions(object: Object): Array<string>;
-    findKey(object: Object, predicate: () => boolean, context?: mixed): ?string;
+    findKey<K, V>(object: {[keys: K]: V}, predicate: (V, K, {[keys: K]: V}) => boolean, context?: mixed): ?string;
     extend: typeof $underscore$Extend;
     extendOwn: typeof $underscore$Extend;
-    pick<K, V>(object: {[keys: K]: V}): {[keys: K]: V};
-    omit<K, V>(object: {[keys: K]: V}): {[keys: K]: V};
-    defaults<K, V>(defaults: {[keys: K]: V}, more: {[keys: K]: V}): {[keys: K]: V};
+    pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
+    omit<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
+    defaults(defaults: ?Object, ...mores?: Array<Object>): Object;
     clone<O: {}>(object: O): O;
     tap<O>(object: O): O;
     has(object: Object, key: string): boolean;
@@ -495,7 +497,7 @@ declare module "underscore" {
     invert(): UnderscoreChainedObject<WrappedObj>;
     // TODO: _.create
     functions(): UnderscoreChainedList<string>;
-    findKey(predicate: () => boolean, context?: mixed): UnderscoreChainedValue<?string>;
+    findKey(predicate: ($Values<WrappedObj>, $Keys<WrappedObj>, WrappedObj) => boolean, context?: mixed): UnderscoreChainedValue<?$Keys<WrappedObj>>;
     // TODO: Reimplement these when you can get them to return UnderscoreChainedObject
     // extend: ExtendParameterized<{[key: K]: V}>;
     // extendOwn: ExtendParameterized<{[key: K]: V}>>;
@@ -546,7 +548,7 @@ declare module "underscore" {
     // TODO: _.create
     functions(): Array<string>;
     find(predicate: (v: any, k: $Keys<WrappedObj>, obj: WrappedObj) => boolean): ?any;
-    findKey(predicate: () => boolean, context?: mixed): ?string;
+    findKey(predicate: ($Values<WrappedObj>, $Keys<WrappedObj>, WrappedObj) => boolean, context?: mixed): ?$Keys<WrappedObj>;
     extend: typeof $underscore$ExtendParameterized;
     extendOwn: typeof $underscore$ExtendParameterized;
     // TODO make these actually remove properties
@@ -613,6 +615,7 @@ declare module "underscore" {
     reduceRight<U>(iteratee: (memo: U, value: T, index?: number) => U, init: U): U;
     find(predicate: (value: T) => boolean): ?T;
     filter(predicate: (value: T) => boolean): Array<T>;
+    filter(predicate: {[string]: T}): Array<T>;    
     where(properties: Object): Array<T>;
     findWhere(properties: $Shape<T>): ?T;
     reject(predicate: (value: T) => boolean, context?: mixed): Array<T>;
