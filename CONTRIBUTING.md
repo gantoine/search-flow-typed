@@ -1,1 +1,1 @@
-Open a PR and ping me.
+If you're interesting in contibuting, fork the repo, make your changes and open a pull request. Please consider adding/improving tests along the way, but I won't twist your arm. PRs with failing builds will be rejected, all will ones will failing flow type checking.
