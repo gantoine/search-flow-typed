@@ -2,6 +2,7 @@
 
 import React, { Component, Element } from 'react';
 import Results from '../Results/Results';
+import Algolia from '../Algolia/Algolia';
 import FontAwesome from 'react-fontawesome';
 import _ from 'underscore';
 import api from '../../utils/api';
@@ -24,26 +25,19 @@ class Search extends Component {
     }
     this.search = this.search.bind(this);
     this.resultClass = this.resultClass.bind(this);
-
-    api.fetchDefinitions()
-      .then((definitions: NetResult[]) => {
-        this.setState({definitions: definitions});
-      })
   }
   search(event: SyntheticInputEvent) {
-    let query = event.target.value;
-    let filtered: NetResult[] = [];
+    let query: string = event.target.value;
+    this.setState({query: query});
 
-    if (query !== '') {
-      filtered = _.filter(this.state.definitions, (typedef: NetResult) => {
-        return typedef.definition.toLowerCase().includes(query);
-      })
+    if (query === '') {
+      this.setState({results: []});
+    } else {
+      api.search(query, this.callback.bind(this));
     }
-
-    this.setState({
-      query: query,
-      results: _.first(filtered, 20)
-    });
+  }
+  callback(results: NetResult[]) {
+    this.setState({results: results});
   }
   resultClass() {
     return (this.state.query.length ? 'search-results' : 'search-no-results');
@@ -54,6 +48,7 @@ class Search extends Component {
         <div className="search-container">
           <div className={`container ${this.resultClass()}`}>
             <h1 className="project-name">Flow-Typed Definition Search</h1>
+            <Algolia />
             <div className="row">
               <div className="col-md-12 input-group input-group-lg">
                 <span className="input-group-addon" id="search-addon">
