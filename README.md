@@ -2,7 +2,7 @@
 [![MIT License](https://img.shields.io/npm/l/retro-game-names.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 Flow-Typed Definition Search is an online tool for finding third-party library
-interface definitions, located in the [flow-typed](https://github.com/flowtype/flow-typed)
+interface definitions, located in the [flow-typed](https://github.com/flow-typed/flow-typed)
 repository. FTDS will fetch the latest definitions at each page refresh.
 
 ## Installing

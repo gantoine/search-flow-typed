@@ -25,7 +25,7 @@ class Variant extends Component {
     this.clipboard.destroy();
   }
   toRepo(variant: ValidResult): string {
-    let github: string = 'https://github.com/flowtype/flow-typed/tree/master/definitions/npm';
+    let github: string = 'https://github.com/flow-typed/flow-typed/tree/master/definitions/npm';
     return `${github}/${variant.definition}_v${variant.version}/${variant.flow}`;
   }
   installCommand(variant): string {
