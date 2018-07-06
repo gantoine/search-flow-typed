@@ -21,7 +21,6 @@ class Search extends Component {
     this.state = {
       results: [],
       query: '',
-      definitions: [],
     }
     this.search = this.search.bind(this);
     this.resultClass = this.resultClass.bind(this);
@@ -56,7 +55,7 @@ class Search extends Component {
                 </span>
                 <input type="text"
                   value={this.state.query}
-                  placeholder={`Search ${this.state.definitions.length} third-party library interface definitions...`}
+                  placeholder={`Search third-party library interface definitions...`}
                   className="form-control"
                   aria-describedby="search-addon"
                   onChange={this.search} />

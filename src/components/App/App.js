@@ -21,7 +21,7 @@ class Navigation extends Component {
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} target="_blank"
-                  href="https://github.com/flowtype/flow-typed">
+                  href="https://github.com/flow-typed/flow-typed">
                 Flow Typed
               </NavItem>
             </Nav>
@@ -46,7 +46,7 @@ class Footer extends Component {
           © 2017 Georges-Antoine Assi. Built with
           <FontAwesome name='heart' />
           and React, for the&nbsp;
-          <a href="https://github.com/flowtype/flow-typed"
+          <a href="https://github.com/flow-typed/flow-typed"
             className="hyperlink" target="_blank">Flow Typed</a>
           &nbsp;project.
         </div>
